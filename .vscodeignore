@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+start/**
+test/**
+src/**
+.gitignore
+.eslintrc.json
+vsc-extension-quickstart.md
+webpack.config.js
+yarn.lock
+esbuild.js
+node_modules/**
+**/*.map

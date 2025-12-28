@@ -1,0 +1,187 @@
+{
+  "name": "convertism",
+  "displayName": "Convertism",
+  "description": "Universal data converter for JSON, YAML, TOML, TOON, JS Objects, and Parquet.",
+  "version": "0.0.1",
+  "publisher": "princegarg",
+  "author": {
+    "name": "Prince Garg"
+  },
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/princegarg/convertism"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "toon",
+        "aliases": [
+          "TOON",
+          "toon"
+        ],
+        "extensions": [
+          ".toon"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "convertism.convertToYaml",
+        "title": "Convert to YAML",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.convertToJson",
+        "title": "Convert to JSON",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.convertToToml",
+        "title": "Convert to TOML",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.convertToToon",
+        "title": "Convert to TOON",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.beautifyJson",
+        "title": "Beautify JSON",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.minifyJson",
+        "title": "Minify JSON",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.convertToJsObject",
+        "title": "Convert to JS Object",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.convertToParquet",
+        "title": "Convert to Parquet (Save as File)",
+        "category": "Convertism"
+      },
+      {
+        "command": "convertism.convertFromParquet",
+        "title": "Import Parquet to JSON",
+        "category": "Convertism"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "convertism.convertToYaml",
+        "key": "ctrl+alt+y",
+        "mac": "cmd+alt+y",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.convertToJson",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.convertToToml",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.convertToToon",
+        "key": "ctrl+alt+o",
+        "mac": "cmd+alt+o",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.convertToJsObject",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.convertToParquet",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "convertism.convertToYaml",
+          "group": "convertism@1"
+        },
+        {
+          "command": "convertism.convertToJson",
+          "group": "convertism@2"
+        },
+        {
+          "command": "convertism.convertToToml",
+          "group": "convertism@3"
+        },
+        {
+          "command": "convertism.convertToToon",
+          "group": "convertism@4"
+        },
+        {
+          "command": "convertism.convertToJsObject",
+          "group": "convertism@5"
+        },
+        {
+          "command": "convertism.convertToParquet",
+          "group": "convertism@6"
+        },
+        {
+          "command": "convertism.convertFromParquet",
+          "group": "convertism@6"
+        },
+        {
+          "command": "convertism.beautifyJson",
+          "when": "editorLangId == json",
+          "group": "convertism@7"
+        },
+        {
+          "command": "convertism.minifyJson",
+          "when": "editorLangId == json",
+          "group": "convertism@7"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/vscode": "^1.90.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^8.57.0"
+  },
+  "dependencies": {
+    "@dsnp/parquetjs": "^1.8.7",
+    "@iarna/toml": "^2.2.5",
+    "javascript-stringify": "^2.1.0",
+    "js-yaml": "^4.1.0",
+    "toon-json-converter": "^2.0.6"
+  }
+}

@@ -128,7 +128,7 @@
         "command": "convertism.minify",
         "key": "ctrl+alt+m",
         "mac": "cmd+alt+m",
-        "when": "editorTextFocus && (editorLangId == json || editorLangId == css)"
+        "when": "editorTextFocus && (editorLangId == json || editorLangId == css || editorLangId == javascript || editorLangId == javascriptreact)"
       }
     ],
     "menus": {
@@ -167,7 +167,7 @@
         },
         {
           "command": "convertism.minify",
-          "when": "editorLangId == json || editorLangId == css",
+          "when": "editorLangId == json || editorLangId == css || editorLangId == javascript || editorLangId == javascriptreact",
           "group": "convertism@7"
         }
       ]
@@ -193,6 +193,7 @@
     "@iarna/toml": "^2.2.5",
     "javascript-stringify": "^2.1.0",
     "js-yaml": "^4.1.0",
+    "terser": "^5.44.1",
     "toon-json-converter": "^2.0.6"
   }
 }

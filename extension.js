@@ -168,8 +168,19 @@ function activate(context) {
 					.replace(/;}/g, "}")              // Remove last semicolon
 					.trim();
 			});
+		} else if (lang === 'javascript' || lang === 'javascriptreact') {
+			processTextConversion(lang, async (text) => {
+				try {
+					const { minify } = require("terser");
+					const result = await minify(text, { mangle: true, compress: true });
+					if (result.code) return result.code;
+					return text;
+				} catch (e) {
+					throw new Error(`Terser Minification Failed: ${e.message}`);
+				}
+			});
 		} else {
-			vscode.window.showErrorMessage(`Minify not supported for ${lang}. Only JSON and CSS are supported.`);
+			vscode.window.showErrorMessage(`Minify not supported for ${lang}. Only JSON, CSS, and JS are supported.`);
 		}
 	});
 }
@@ -282,9 +293,9 @@ function processTextConversion(requiredLanguageId, convertFunc) {
 		return;
 	}
 
-	processConversion(editor, (text) => {
+	processConversion(editor, async (text) => {
 		try {
-			return convertFunc(text);
+			return await convertFunc(text);
 		} catch (e) {
 			vscode.window.showErrorMessage(`Error: ${e.message}`);
 			return null;
@@ -295,13 +306,16 @@ function processTextConversion(requiredLanguageId, convertFunc) {
 /**
  * Generic helper to read, transform, replace, and optionally callback.
  */
-function processConversion(editor, transformFunc, onComplete) {
+async function processConversion(editor, transformFunc, onComplete) {
 	const document = editor.document;
 	const selection = editor.selection;
 
 	const text = selection.isEmpty ? document.getText() : document.getText(selection);
 
-	const result = transformFunc(text);
+	let result = transformFunc(text);
+	if (result instanceof Promise) {
+		result = await result;
+	}
 
 	if (result !== null && result !== undefined) {
 		editor.edit(editBuilder => {

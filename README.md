@@ -9,7 +9,7 @@ Whether you are configuring cloud infrastructure, debugging API responses, or wo
 - **🔄 Universal Conversion**: Convert any supported format to any other format (e.g., YAML → TOML, JSON → JS Object).
 - **📦 Parquet Support**: Export your data to `.parquet` binary files or import Parquet files as JSON.
 - **⚡ Smart Detection**: Automatically detects source language and switches editor mode after conversion.
-- **🎨 JSON Tools**: Built-in **Beautify** and **Minify** for JSON.
+- **🎨 Formatting Tools**: Built-in **Universal Beautify** (JSON, HTML, CSS, JS...) and **Minify** (JSON & CSS).
 - **🛠️ Zero Config**: Works out of the box with intuitive shortcuts.
 
 ## 🚀 Supported Formats
@@ -35,6 +35,8 @@ Work faster with global keybindings (active in any supported file):
 | **Convert to TOON** | `Cmd+Alt+O` | `Ctrl+Alt+O` |
 | **Convert to JS Object** | `Cmd+Alt+S` | `Ctrl+Alt+S` |
 | **Export to Parquet** | `Cmd+Alt+P` | `Ctrl+Alt+P` |
+| **Beautify (Universal)** | `Cmd+Alt+B` | `Ctrl+Alt+B` |
+| **Minify (JSON/CSS)** | `Cmd+Alt+M` | `Ctrl+Alt+M` |
 
 ## 📖 Usage
 
@@ -53,6 +55,15 @@ Work faster with global keybindings (active in any supported file):
 1. Open Command Palette (`Cmd+Shift+P`).
 2. Run `Import Parquet to JSON`.
 3. Select your `.parquet` file to load it as JSON.
+
+### Formatting
+**Beautify (`Cmd+Alt+B`):**
+- **JSON**: Validates and re-formats strict JSON.
+- **Other Files**: Triggers VS Code's standard formatter (supports HTML, CSS, JS, etc.).
+
+**Minify (`Cmd+Alt+M`):**
+- **JSON**: Removes whitespace.
+- **CSS**: Removes whitespace and comments.
 
 ## ❗ Known Issues
 - **Parquet Schema**: Nested objects in Parquet export are currently simplified or stringified. Complex schemas may require manual adjustment.

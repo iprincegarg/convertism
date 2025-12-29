@@ -56,13 +56,13 @@
         "category": "Convertism"
       },
       {
-        "command": "convertism.beautifyJson",
-        "title": "Beautify JSON",
+        "command": "convertism.beautify",
+        "title": "Beautify",
         "category": "Convertism"
       },
       {
-        "command": "convertism.minifyJson",
-        "title": "Minify JSON",
+        "command": "convertism.minify",
+        "title": "Minify",
         "category": "Convertism"
       },
       {
@@ -117,6 +117,18 @@
         "key": "ctrl+alt+p",
         "mac": "cmd+alt+p",
         "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.beautify",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "convertism.minify",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "editorTextFocus && (editorLangId == json || editorLangId == css)"
       }
     ],
     "menus": {
@@ -150,13 +162,12 @@
           "group": "convertism@6"
         },
         {
-          "command": "convertism.beautifyJson",
-          "when": "editorLangId == json",
+          "command": "convertism.beautify",
           "group": "convertism@7"
         },
         {
-          "command": "convertism.minifyJson",
-          "when": "editorLangId == json",
+          "command": "convertism.minify",
+          "when": "editorLangId == json || editorLangId == css",
           "group": "convertism@7"
         }
       ]

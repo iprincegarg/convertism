@@ -130,20 +130,47 @@ function activate(context) {
 		}
 	});
 
-	// --- Formatting Commands (JSON Only) ---
+	// --- Formatting Commands ---
 
-	register('convertism.beautifyJson', () => {
-		processTextConversion('json', (text) => {
-			const obj = JSON.parse(text);
-			return JSON.stringify(obj, null, 2);
-		});
+	register('convertism.beautify', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) return;
+
+		if (editor.document.languageId === 'json') {
+			// Strict JSON re-serialization (removes comments, validates structure)
+			processTextConversion('json', (text) => {
+				const obj = JSON.parse(text);
+				return JSON.stringify(obj, null, 2);
+			});
+		} else {
+			// Universal Fallback: Use VS Code's native formatter
+			vscode.commands.executeCommand('editor.action.formatDocument');
+		}
 	});
 
-	register('convertism.minifyJson', () => {
-		processTextConversion('json', (text) => {
-			const obj = JSON.parse(text);
-			return JSON.stringify(obj);
-		});
+	register('convertism.minify', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) return;
+
+		const lang = editor.document.languageId;
+
+		if (lang === 'json') {
+			processTextConversion('json', (text) => {
+				const obj = JSON.parse(text);
+				return JSON.stringify(obj);
+			});
+		} else if (lang === 'css') {
+			processTextConversion('css', (text) => {
+				return text
+					.replace(/\/\*[\s\S]*?\*\//g, "") // Remove comments
+					.replace(/\s+/g, " ")             // Collapse whitespace
+					.replace(/\s*([:;{}])\s*/g, "$1") // Remove space around separators
+					.replace(/;}/g, "}")              // Remove last semicolon
+					.trim();
+			});
+		} else {
+			vscode.window.showErrorMessage(`Minify not supported for ${lang}. Only JSON and CSS are supported.`);
+		}
 	});
 }
 
